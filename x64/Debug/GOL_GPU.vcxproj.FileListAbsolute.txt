@@ -1,0 +1,2 @@
+E:\pwr\Semestr VII\gpu\GOL_GPU\x64\Debug\GOL_GPU.exe
+E:\pwr\Semestr VII\gpu\GOL_GPU\x64\Debug\GOL_GPU.pdb
