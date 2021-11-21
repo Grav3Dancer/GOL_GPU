@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include "utilities.h"
+#include "serialCPU.h"
 
 cudaError_t addWithCuda(int *c, const int *a, const int *b, unsigned int size);
 
@@ -42,15 +43,20 @@ int main()
     int size = width * height;
 
     bool* map1 = new bool[size];
+    bool* map1Result = new bool[size];
     unsigned char* map2 = new unsigned char[(int) (width / 8) * height];
 
     generateMap(map1, width);
 
     prettyPrint(map1, width, height);
 
-    generateMap(map2, width, height);
+    //generateMap(map2, width, height);
 
-    prettyPrint(map2, width, height);
+    //prettyPrint(map2, width, height);
+    std::cout << "One serial iteration" << std::endl;
+    iterationSerial(map1, map1Result, 1, height, width);
+
+    prettyPrint(map1, width, height);
 
 
     return 0;

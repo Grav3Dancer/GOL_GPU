@@ -80,9 +80,11 @@
     <CudaCompile Include="kernel.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SerialCPU.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="serialCPU.h" />
     <ClInclude Include="utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
