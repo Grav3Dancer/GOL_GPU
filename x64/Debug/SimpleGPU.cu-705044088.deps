@@ -41,6 +41,7 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include\vector_function
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include\vector_functions.hpp
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include\vector_types.h
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\atomic
+D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cctype
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cerrno
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cfloat
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\climits
@@ -52,6 +53,7 @@ D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cstdint
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cstdio
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cstdlib
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cstring
+D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\ctime
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\cwchar
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\eh.h
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\exception
@@ -71,6 +73,7 @@ D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\sal.h
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\stdexcept
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\stdint.h
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\streambuf
+D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\string
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\system_error
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\typeinfo
 D:\VisualStudio\VC\Tools\MSVC\14.27.29110\include\type_traits
@@ -136,3 +139,4 @@ D:\Windows Kits\10\Include\10.0.19041.0\ucrt\sys\types.h
 D:\Windows Kits\10\Include\10.0.19041.0\ucrt\time.h
 D:\Windows Kits\10\Include\10.0.19041.0\ucrt\wchar.h
 E:\pwr\Semestr VII\gpu\GOL_GPU\SimpleGPU.cuh
+E:\pwr\Semestr VII\gpu\GOL_GPU\utilities.h

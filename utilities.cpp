@@ -10,8 +10,8 @@ void generateMap(bool* map, size_t width, size_t height) {
 
 	for (size_t i = 0;i < width; i++) {
 		for (size_t j = 0;j < height; j++) {
-			map[j * height + i] = ((float)rand() / (float)RAND_MAX) < THRESHOLD;
-			counter += map[j * height + i];
+			map[j * width + i] = ((float)rand() / (float)RAND_MAX) < THRESHOLD;
+			counter += map[j * width + i];
 		}
 	}
 
@@ -26,8 +26,8 @@ void generateMap(unsigned char* map, size_t width, size_t height) {
 
 	for (size_t i = 0;i < width/8; i++) {
 		for (size_t j = 0;j < height; j++) {
-			map[j * height + i] = _generateRandomCellGroup();
-			counter += _countSetBits(map[j * height + i]);
+			map[j * width + i] = _generateRandomCellGroup();
+			counter += _countSetBits(map[j * width + i]);
 		}
 	}
 
@@ -65,7 +65,7 @@ unsigned int _countSetBits(unsigned char x) {
 void prettyPrint(bool* map, int width, int height) {
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width; j++) {
-			std::cout << map[i * height + j] << " ";
+			std::cout << map[i * width + j] << " ";
 		}
 		std::cout << std::endl;
 	}
@@ -74,7 +74,7 @@ void prettyPrint(bool* map, int width, int height) {
 void prettyPrint(unsigned char* map, int width, int height) {
 	for (size_t i = 0; i < height; i++) {
 		for (size_t j = 0; j < width/8; j++) {
-			std::cout << map[i * height + j] * 1 << " ";
+			std::cout << map[i * width + j] * 1 << " ";
 		}
 		std::cout << std::endl;
 	}

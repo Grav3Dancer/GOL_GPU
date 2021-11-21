@@ -38,19 +38,21 @@ int main()
     //    fprintf(stderr, "cudaDeviceReset failed!");
     //    return 1;
     //}
-    int iterations = 10;
+    int iterations = 1;
     int threads = 16;
-    int width = 1024;
-    int height = 1024;
+    int width = 16;
+    int height = 16;
     int size = width * height;
 
     bool* map = new bool[size];
     bool* mapBuffer = new bool[size];
 
     generateMap(map, width, height);
-
-    runEvaluateSimple(map, mapBuffer, width, height, 10, threads);
-
+    //std::cout << "Iteration 0" << std::endl;
+    //prettyPrint(map, width, height);
+    runEvaluateSimple(map, mapBuffer, width, height, iterations, threads);
+    //std::cout << "Iteration 1" << std::endl;
+    //prettyPrint(map, width, height);
     return 0;
 }
 
