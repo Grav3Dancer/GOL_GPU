@@ -3,20 +3,20 @@
 unsigned char _generateRandomCellGroup();
 unsigned int _countSetBits(unsigned char x);
 
-void generateMap(bool* map, size_t N) {
+void generateMap(bool* map, size_t width, size_t height) {
 	srand(time(NULL));
 
 	unsigned int counter = 0;
 
-	for (size_t i = 0;i < N; i++) {
-		for (size_t j = 0;j < N; j++) {
-			map[j * N + i] = ((float)rand() / (float)RAND_MAX) < THRESHOLD;
-			counter += map[j * N + i];
+	for (size_t i = 0;i < width; i++) {
+		for (size_t j = 0;j < height; j++) {
+			map[j * height + i] = ((float)rand() / (float)RAND_MAX) < THRESHOLD;
+			counter += map[j * height + i];
 		}
 	}
 
 	std::cout << "Number of non zero elements: " << counter << std::endl;
-	std::cout << "Percent: " << (float)counter / (float)(N * N) << std::endl;
+	std::cout << "Percent: " << (float)counter / (float)(width * height) << std::endl;
 }
 
 void generateMap(unsigned char* map, size_t width, size_t height) {

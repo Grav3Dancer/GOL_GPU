@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include "utilities.h"
+#include "SimpleGPU.cuh"
 
 cudaError_t addWithCuda(int *c, const int *a, const int *b, unsigned int size);
 
@@ -37,21 +38,18 @@ int main()
     //    fprintf(stderr, "cudaDeviceReset failed!");
     //    return 1;
     //}
-    int width = 16;
-    int height = 16;
+    int iterations = 10;
+    int threads = 16;
+    int width = 1024;
+    int height = 1024;
     int size = width * height;
 
-    bool* map1 = new bool[size];
-    unsigned char* map2 = new unsigned char[(int) (width / 8) * height];
+    bool* map = new bool[size];
+    bool* mapBuffer = new bool[size];
 
-    generateMap(map1, width);
+    generateMap(map, width, height);
 
-    prettyPrint(map1, width, height);
-
-    generateMap(map2, width, height);
-
-    prettyPrint(map2, width, height);
-
+    runEvaluateSimple(map, mapBuffer, width, height, 10, threads);
 
     return 0;
 }
