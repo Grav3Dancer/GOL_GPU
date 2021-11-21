@@ -1,6 +1,8 @@
 ﻿
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
+#include <chrono>
+#include <string>
 
 #include <stdio.h>
 #include "utilities.h"
@@ -39,10 +41,10 @@ int main()
     //    fprintf(stderr, "cudaDeviceReset failed!");
     //    return 1;
     //}
-    int iterations = 1;
+    int iterations = 10000;
     int threads = 16;
-    int width = 16;
-    int height = 16;
+    int width = 480;
+    int height = 480;
     int size = width * height;
 
     bool* map = new bool[size];
@@ -51,10 +53,17 @@ int main()
     generateMap(map, width, height);
     //std::cout << "Iteration 0" << std::endl;
     //prettyPrint(map, width, height);
+    auto start = std::chrono::high_resolution_clock::now();
     runEvaluateSimple(map, mapBuffer, width, height, iterations, threads);
+    auto startCPU = std::chrono::high_resolution_clock::now();
     iterationSerial(map, mapBuffer, iterations, height, width);
+    auto stop = std::chrono::high_resolution_clock::now();
     std::cout << std::endl;
-    prettyPrint(map, width, height);
+    //prettyPrint(map, width, height);
+    std::cout << std::endl;
+    auto durationGPU = std::chrono::duration_cast<std::chrono::milliseconds>(startCPU - start);
+    auto durationCPU = std::chrono::duration_cast<std::chrono::milliseconds>(stop - startCPU);
+    std::cout << durationGPU.count() << std::endl << durationCPU.count() << std::endl;
     //std::cout << "Iteration 1" << std::endl;
     //prettyPrint(map, width, height);
     return 0;

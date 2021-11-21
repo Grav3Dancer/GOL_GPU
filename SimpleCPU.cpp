@@ -25,6 +25,6 @@ void iterationSerial(bool*& worldData, bool* worldDataResult, size_t iterationsN
 			}
 		}
 		std::swap(worldData, worldDataResult);
-		std::cout << std::endl << "iteration " << i << std::endl;
+		//std::cout << std::endl << "iteration " << i << std::endl;
 	}
 }

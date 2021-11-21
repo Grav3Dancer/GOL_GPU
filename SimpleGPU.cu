@@ -40,16 +40,16 @@ void runEvaluateSimple(bool*& map, bool* mapBuffer, size_t mapWidth, size_t mapH
 	size_t reqBlocks = (mapWidth * mapHeight) / threads;
 	unsigned int blocks = std::min((size_t)32768, reqBlocks);
 
-	std::cout << "Iteration 0" << std::endl;
-	prettyPrint(map, mapWidth, mapHeight);
+	//std::cout << "Iteration 0" << std::endl;
+	//prettyPrint(map, mapWidth, mapHeight);
 	for (size_t i = 0; i < iterations; i++) {
-		std::cout << "Runing simple" << std::endl;
+		//std::cout << "Runing simple" << std::endl;
 		evaluateSimple << <blocks, threads >> > (devMap, mapWidth, mapHeight, devMapBuffer);
 		cudaDeviceSynchronize();
 		std::swap(devMap, devMapBuffer);
 	}
 
 	cudaMemcpy(map, devMap, size, cudaMemcpyDeviceToHost);
-	std::cout << "Iteration 1" << std::endl;
-	prettyPrint(map, mapWidth, mapHeight);
+	//std::cout << "Iteration 1" << std::endl;
+	//prettyPrint(map, mapWidth, mapHeight);
 }

@@ -1,7 +1,7 @@
-﻿  Compiling CUDA source file kernel.cu...
+﻿  Compiling CUDA source file SimpleGPU.cu...
   
-  D:\VisualProjects\GOL_GPU>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "D:\Programy dodatkowe\VisualStudio\VC\Tools\MSVC\14.28.29333\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "D:\VisualProjects\GOL_GPU\kernel.cu" 
-  kernel.cu
-  SimpleCPU.cpp
-     Trwa tworzenie biblioteki D:\VisualProjects\GOL_GPU\x64\Debug\GOL_GPU.lib i obiektu D:\VisualProjects\GOL_GPU\x64\Debug\GOL_GPU.exp
+  D:\VisualProjects\GOL_GPU>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "D:\Programy dodatkowe\VisualStudio\VC\Tools\MSVC\14.28.29333\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\SimpleGPU.cu.obj "D:\VisualProjects\GOL_GPU\SimpleGPU.cu" 
+  SimpleGPU.cu
+D:\VisualProjects\GOL_GPU\SimpleGPU.cu(41): warning C4267: "inicjowanie": konwersja z "size_t" do "unsigned int", możliwa utrata danych
+D:\VisualProjects\GOL_GPU\SimpleGPU.cu(47): warning C4267: "argument": konwersja z "size_t" do "unsigned int", możliwa utrata danych
   GOL_GPU.vcxproj -> D:\VisualProjects\GOL_GPU\x64\Debug\GOL_GPU.exe
