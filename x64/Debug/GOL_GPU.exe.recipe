@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\VisualProjects\GOL_GPU\x64\Debug\GOL_GPU.exe</FullPath>
+      <FullPath>C:\repos\game-of-life\x64\Debug\GOL_GPU.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
