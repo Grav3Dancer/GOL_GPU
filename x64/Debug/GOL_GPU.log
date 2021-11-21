@@ -1,5 +1,23 @@
 ﻿  Compiling CUDA source file kernel.cu...
+  Compiling CUDA source file SimpleGPU.cu...
   
+<<<<<<< HEAD
   D:\VisualProjects\gameOfLife>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "D:\Programy dodatkowe\VisualStudio\VC\Tools\MSVC\14.28.29333\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "D:\VisualProjects\gameOfLife\kernel.cu" 
   kernel.cu
   GOL_GPU.vcxproj -> D:\VisualProjects\gameOfLife\x64\Debug\GOL_GPU.exe
+=======
+  E:\pwr\Semestr VII\gpu\GOL_GPU>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "E:\pwr\Semestr VII\gpu\GOL_GPU\kernel.cu" 
+  
+  E:\pwr\Semestr VII\gpu\GOL_GPU>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "D:\VisualStudio\VC\Tools\MSVC\14.27.29110\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\SimpleGPU.cu.obj "E:\pwr\Semestr VII\gpu\GOL_GPU\SimpleGPU.cu" 
+E:\pwr\Semestr VII\gpu\GOL_GPU\kernel.cu(41): warning #177-D: variable "iterations" was declared but never referenced
+  
+  kernel.cu
+  SimpleGPU.cu
+E:\pwr\Semestr VII\gpu\GOL_GPU\SimpleGPU.cu(30): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+E:\pwr\Semestr VII\gpu\GOL_GPU\SimpleGPU.cu(33): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  utilities.cpp
+E:\pwr\Semestr VII\gpu\GOL_GPU\utilities.cpp(7,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\pwr\Semestr VII\gpu\GOL_GPU\utilities.cpp(23,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+     Creating library E:\pwr\Semestr VII\gpu\GOL_GPU\x64\Debug\GOL_GPU.lib and object E:\pwr\Semestr VII\gpu\GOL_GPU\x64\Debug\GOL_GPU.exp
+  GOL_GPU.vcxproj -> E:\pwr\Semestr VII\gpu\GOL_GPU\x64\Debug\GOL_GPU.exe
+>>>>>>> d579d0f689b3bd8251e48c8ebbbc94b7db409bf0

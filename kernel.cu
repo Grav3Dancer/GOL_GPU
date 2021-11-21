@@ -4,7 +4,11 @@
 
 #include <stdio.h>
 #include "utilities.h"
+<<<<<<< HEAD
 #include "serialCPU.h"
+=======
+#include "SimpleGPU.cuh"
+>>>>>>> d579d0f689b3bd8251e48c8ebbbc94b7db409bf0
 
 cudaError_t addWithCuda(int *c, const int *a, const int *b, unsigned int size);
 
@@ -38,10 +42,13 @@ int main()
     //    fprintf(stderr, "cudaDeviceReset failed!");
     //    return 1;
     //}
-    int width = 16;
-    int height = 16;
+    int iterations = 10;
+    int threads = 16;
+    int width = 1024;
+    int height = 1024;
     int size = width * height;
 
+<<<<<<< HEAD
     bool* map1 = new bool[size];
     bool* map1Result = new bool[size];
     unsigned char* map2 = new unsigned char[(int) (width / 8) * height];
@@ -57,7 +64,14 @@ int main()
     iterationSerial(map1, map1Result, 1, height, width);
 
     prettyPrint(map1, width, height);
+=======
+    bool* map = new bool[size];
+    bool* mapBuffer = new bool[size];
 
+    generateMap(map, width, height);
+>>>>>>> d579d0f689b3bd8251e48c8ebbbc94b7db409bf0
+
+    runEvaluateSimple(map, mapBuffer, width, height, 10, threads);
 
     return 0;
 }

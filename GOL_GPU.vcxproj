@@ -78,13 +78,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="SimpleGPU.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SerialCPU.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="serialCPU.h" />
+=======
+    <ClInclude Include="SimpleGPU.cuh" />
+>>>>>>> d579d0f689b3bd8251e48c8ebbbc94b7db409bf0
     <ClInclude Include="utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
