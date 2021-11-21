@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "utilities.h"
 #include "SimpleGPU.cuh"
+#include "SimpleCPU.h"
 
 cudaError_t addWithCuda(int *c, const int *a, const int *b, unsigned int size);
 
@@ -51,6 +52,9 @@ int main()
     //std::cout << "Iteration 0" << std::endl;
     //prettyPrint(map, width, height);
     runEvaluateSimple(map, mapBuffer, width, height, iterations, threads);
+    iterationSerial(map, mapBuffer, iterations, height, width);
+    std::cout << std::endl;
+    prettyPrint(map, width, height);
     //std::cout << "Iteration 1" << std::endl;
     //prettyPrint(map, width, height);
     return 0;
