@@ -3,6 +3,7 @@
 #include "device_launch_parameters.h"
 #include <chrono>
 #include <string>
+#include <conio.h>
 
 #include <stdio.h>
 #include "utilities.h"
@@ -20,30 +21,8 @@ __global__ void addKernel(int* c, const int* a, const int* b)
 
 int main()
 {
-	//const int arraySize = 5;
-	//const int a[arraySize] = { 1, 2, 3, 4, 5 };
-	//const int b[arraySize] = { 10, 20, 30, 40, 50 };
-	//int c[arraySize] = { 0 };
-
-	//// Add vectors in parallel.
-	//cudaError_t cudaStatus = addWithCuda(c, a, b, arraySize);
-	//if (cudaStatus != cudaSuccess) {
-	//    fprintf(stderr, "addWithCuda failed!");
-	//    return 1;
-	//}
-
-	//printf("{1,2,3,4,5} + {10,20,30,40,50} = {%d,%d,%d,%d,%d}\n",
-	//    c[0], c[1], c[2], c[3], c[4]);
-
-	//// cudaDeviceReset must be called before exiting in order for profiling and
-	//// tracing tools such as Nsight and Visual Profiler to show complete traces.
-	//cudaStatus = cudaDeviceReset();
-	//if (cudaStatus != cudaSuccess) {
-	//    fprintf(stderr, "cudaDeviceReset failed!");
-	//    return 1;
-	//}
 	int iterations = 10000;
-	int threads = 16;
+	int threads = 256;
 	int width = 480;
 	int height = 480;
 	int size = width * height;
@@ -55,14 +34,21 @@ int main()
 	//std::cout << "Iteration 0" << std::endl;
 	//prettyPrint(map, width, height);
 
+	bool* mapGPU = new bool[size];
+	std::copy(map, map+size, mapGPU);
+	bool* mapCPU = new bool[size];
+	std::copy(map, map + size, mapCPU);
+	bool* mapPCPU = new bool[size];
+	std::copy(map, map + size, mapPCPU);
+
 	auto start = std::chrono::high_resolution_clock::now();
-	runEvaluateSimple(map, mapBuffer, width, height, iterations, threads);
+	runEvaluateSimple(mapGPU, mapBuffer, width, height, iterations, threads);
 
 	auto startCPU = std::chrono::high_resolution_clock::now();
-	iterationSerial(map, mapBuffer, iterations, height, width);
+	iterationSerial(mapCPU, mapBuffer, iterations, height, width);
 
 	auto startPCPU = std::chrono::high_resolution_clock::now();
-	iterationSimpleParallel(map, mapBuffer, size, iterations, height, width);
+	iterationSimpleParallel(mapPCPU, mapBuffer, size, iterations, height, width);
 
 	auto stop = std::chrono::high_resolution_clock::now();
 
@@ -76,11 +62,19 @@ int main()
 	std::cout << "cpu: " << durationCPU.count() << std::endl;
 	std::cout << "pcpu: " << durationPCPU.count() << std::endl;
 
+	if (!compareMap(mapCPU, mapGPU, width, height)) {
+		std::cout << "GPU incorrect result map" << std::endl;
+	}
+	if (!compareMap(mapCPU, mapPCPU, width, height)) {
+		std::cout << "PCPU incorrect result map" << std::endl;
+	}
+
+	std::cout << "Alive cells: " << aliveCells(mapGPU, width, height) << " " << aliveCells(mapCPU, width, height) << " " << aliveCells(mapPCPU, width, height) << std::endl;
+
 	//prettyPrint(map, width, height);
 
 	std::cout << "press any key to exit";
-	char c;
-	std::cin >> c;
+	getch();
 
 	return 0;
 }
