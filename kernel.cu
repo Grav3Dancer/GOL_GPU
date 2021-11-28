@@ -45,10 +45,10 @@ int main()
 	runEvaluateSimple(mapGPU, mapBuffer, width, height, iterations, threads);
 
 	auto startCPU = std::chrono::high_resolution_clock::now();
-	iterationSerial(mapCPU, mapBuffer, iterations, height, width);
+	//iterationSerial(mapCPU, mapBuffer, iterations, height, width);
 
 	auto startPCPU = std::chrono::high_resolution_clock::now();
-	iterationSimpleParallel(mapPCPU, mapBuffer, size, iterations, height, width);
+	//iterationSimpleParallel(mapPCPU, mapBuffer, size, iterations, height, width);
 
 	auto stop = std::chrono::high_resolution_clock::now();
 

@@ -36,7 +36,7 @@ void generateMap(unsigned char* map, size_t width, size_t height) {
 }
 
 bool compareMap(bool* map1, bool* map2, size_t width, size_t height) {
-	for (size_t i = 0; i < width / 8; i++) {
+	for (size_t i = 0; i < width; i++) {
 		for (size_t j = 0;j < height;j++) {
 			if (map1[j * width + i] != map2[j * width + i])
 				return false;
@@ -47,7 +47,7 @@ bool compareMap(bool* map1, bool* map2, size_t width, size_t height) {
 
 unsigned int aliveCells(bool* map, size_t width, size_t height) {
 	unsigned int counter = 0;
-	for (size_t i = 0; i < width / 8; i++) {
+	for (size_t i = 0; i < width; i++) {
 		for (size_t j = 0;j < height;j++) {
 			if (map[j * width + i])
 				counter++;
