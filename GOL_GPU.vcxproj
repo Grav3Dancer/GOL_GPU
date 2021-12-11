@@ -82,12 +82,14 @@
     <CudaCompile Include="SimpleGPU.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComplexPCPU.cpp" />
     <ClCompile Include="SimpleCPU.cpp" />
     <ClCompile Include="SimplePCPU.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdvancedGPU.cuh" />
+    <ClInclude Include="ComplexPCPU.h" />
     <ClInclude Include="SimpleCPU.h" />
     <ClInclude Include="SimpleGPU.cuh" />
     <ClInclude Include="SimplePCPU.h" />
