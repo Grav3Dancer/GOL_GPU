@@ -13,10 +13,10 @@ void iterationComplexParallel(unsigned char*& worldData, unsigned char* worldDat
 
 
 	if (worldDataWidth % blocksPerThread != 0) {
-		std::cout << worldDataWidth << std::endl;
-		std::cout << blocksPerThread << std::endl;
-		std::cout << worldDataWidth % blocksPerThread << std::endl;
-		std::cout << "complex pcpu error here: worldDataWidth % blocksPerThread != 0" << std::endl;
+		//std::cout << worldDataWidth << std::endl;
+		//std::cout << blocksPerThread << std::endl;
+		//std::cout << worldDataWidth % blocksPerThread << std::endl;
+		//std::cout << "complex pcpu error here: worldDataWidth % blocksPerThread != 0" << std::endl;
 		return;
 	}
 

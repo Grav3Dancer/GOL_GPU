@@ -12,6 +12,7 @@
 #include "SimplePCPU.h"
 #include "AdvancedGPU.cuh"
 #include "ComplexPCPU.h"
+#include "Tests.h"
 
 cudaError_t addWithCuda(int* c, const int* a, const int* b, unsigned int size);
 
@@ -23,6 +24,9 @@ __global__ void addKernel(int* c, const int* a, const int* b)
 
 int main()
 {
+	testAll();
+	return;
+
 	int iterations = 10000;
 	int threads = 64;
 	int width = 4096;

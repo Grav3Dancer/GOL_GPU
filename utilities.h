@@ -10,9 +10,9 @@
 
 #define THRESHOLD 0.3
 
-void generateMap(bool*, size_t, size_t);
+void generateMap(bool*, size_t, size_t, bool printInfo = false);
 void copyBoolToCharMap(bool*, unsigned char*, size_t, size_t);
-void generateMap(unsigned char*, size_t, size_t);
+void generateMap(unsigned char*, size_t, size_t, bool printInfo = false);
 void prettyPrint(bool* map, int width, int height);
 void prettyPrint(unsigned char* map, int width, int height);
 bool compareMap(bool* map1, bool* map2, size_t width, size_t height);

@@ -4,7 +4,7 @@ unsigned char _generateRandomCellGroup();
 unsigned int _countSetBits(unsigned char x);
 unsigned char boolToChar(bool*);
 
-void generateMap(bool* map, size_t width, size_t height) {
+void generateMap(bool* map, size_t width, size_t height, bool printInfo) {
 	srand(time(NULL));
 
 	unsigned int counter = 0;
@@ -16,24 +16,26 @@ void generateMap(bool* map, size_t width, size_t height) {
 		}
 	}
 
+	if (printInfo) {
+
 	std::cout << "Number of non zero elements: " << counter << std::endl;
 	std::cout << "Percent: " << (float)counter / (float)(width * height) << std::endl;
+	}
 }
 
-void generateMap(unsigned char* map, size_t width, size_t height) {
+void generateMap(unsigned char* map, size_t width, size_t height, bool printInfo) {
 	srand(time(NULL));
 
 	unsigned int counter = 0;
 
-	for (size_t i = 0;i < width; i++) {
-		for (size_t j = 0;j < height; j++) {
-			map[j * width + i] = _generateRandomCellGroup();
-			counter += _countSetBits(map[j * width + i]);
-		}
+	for (size_t i = 0; i < width * height; i++) {
+		map[i] = _generateRandomCellGroup();
 	}
 
+	if (printInfo) {
 	std::cout << "Number of non zero elements: " << counter << std::endl;
 	std::cout << "Percent: " << (float)counter / (float)(width * height) << std::endl;
+	}
 }
 
 void copyBoolToCharMap(bool* map1, unsigned char* map2, size_t width, size_t height) {

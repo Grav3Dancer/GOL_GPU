@@ -85,6 +85,7 @@
     <ClCompile Include="ComplexPCPU.cpp" />
     <ClCompile Include="SimpleCPU.cpp" />
     <ClCompile Include="SimplePCPU.cpp" />
+    <ClCompile Include="Tests.cpp" />
     <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,7 @@
     <ClInclude Include="SimpleCPU.h" />
     <ClInclude Include="SimpleGPU.cuh" />
     <ClInclude Include="SimplePCPU.h" />
+    <ClInclude Include="Tests.h" />
     <ClInclude Include="utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
