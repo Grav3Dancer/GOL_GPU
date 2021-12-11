@@ -23,7 +23,7 @@ __global__ void addKernel(int* c, const int* a, const int* b)
 
 int main()
 {
-	int iterations = 10;
+	int iterations = 10000;
 	int threads = 64;
 	int width = 4096;
 	int height = 4096;
@@ -52,7 +52,6 @@ int main()
 	//generateMap(mapChar, advancedWidth, advancedHeight);
 	copyBoolToCharMap(map, mapChar, advancedWidth, advancedHeight);
 
-
 	if (!compareBoolToCharMap(map, mapChar, advancedWidth, advancedHeight)) {
 		std::cout << "Copying map is incorrect" << std::endl;
 	}
@@ -66,11 +65,11 @@ int main()
 	//return 0;
 
 
-	unsigned char* mapCharGPU = new unsigned char[size];
+	unsigned char* mapCharGPU = new unsigned char[advancedSize];
 	std::copy(mapChar, mapChar + advancedSize, mapCharGPU);	
 	
-	unsigned char* mapCharPCPU = new unsigned char[size];
-	std::copy(mapChar, mapCharPCPU + advancedSize, mapCharPCPU);
+	unsigned char* mapCharPCPU = new unsigned char[advancedSize];
+	std::copy(mapChar, mapChar + advancedSize, mapCharPCPU);
 
 	auto start = std::chrono::high_resolution_clock::now();
 	runEvaluateSimple(mapGPU, mapBuffer, width, height, iterations, threads);
@@ -82,11 +81,11 @@ int main()
 	// iterationSimpleParallel(mapPCPU, mapBuffer, size, iterations, height, width);
 
 	auto startAdvancedGPU = std::chrono::high_resolution_clock::now();
+
 	runEvaluateAdvanced(mapCharGPU, mapCharBuffer, advancedWidth, advancedHeight, iterations, 1, threads);
-	auto stop = std::chrono::high_resolution_clock::now();	
 	
 	auto startComplexPCPU = std::chrono::high_resolution_clock::now();
-	iterationComplexParallel(mapCharPCPU, mapCharBuffer, advancedWidth, advancedHeight, iterations, threads);
+	iterationComplexParallel(mapCharPCPU, mapCharBuffer, iterations, advancedHeight, advancedWidth, threads);
 	auto stop = std::chrono::high_resolution_clock::now();
 
 	std::cout << std::endl;

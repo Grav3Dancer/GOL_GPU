@@ -2,13 +2,13 @@
 #include "ComplexPCPU.h"
 
 void iterationComplexParallel(unsigned char*& worldData, unsigned char* worldDataResult, size_t iterations, size_t worldHeight, size_t worldWidth, size_t blocksPerThread) {
-	if (worldWidth % 8 != 0) {
-		std::cout << worldWidth % 8 << std::endl;
-		std::cout << "complex pcpu error here: worldWidth % 8 != 0" << std::endl;
-		return;
-	}
+	//if (worldWidth % 8 != 0) {
+	//	std::cout << worldWidth % 8 << std::endl;
+	//	std::cout << "complex pcpu error here: worldWidth % 8 != 0" << std::endl;
+	//	return;
+	//}
 
-	size_t worldDataWidth = worldWidth / 8;
+	size_t worldDataWidth = worldWidth;
 	size_t worldSize = worldDataWidth * worldHeight;
 
 
