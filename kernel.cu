@@ -38,8 +38,6 @@ int main()
 	bool* mapBuffer = new bool[size];
 
 	generateMap(map, width, height);
-	//std::cout << "Iteration 0" << std::endl;
-	//prettyPrint(map, width, height);
 
 	bool* mapGPU = new bool[size];
 	std::copy(map, map + size, mapGPU);
@@ -57,6 +55,14 @@ int main()
 	if (!compareBoolToCharMap(map, mapChar, advancedWidth, advancedHeight)) {
 		std::cout << "Copying map is incorrect" << std::endl;
 	}
+
+	//std::cout << "Bool map" << std::endl;
+	//prettyPrint(map, width, height);
+	//std::cout << "Char map" << std::endl;
+	//prettyPrint(mapChar, advancedWidth, advancedHeight);
+
+
+	//return 0;
 
 
 	unsigned char* mapCharGPU = new unsigned char[size];
