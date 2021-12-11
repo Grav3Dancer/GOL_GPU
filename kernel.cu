@@ -11,6 +11,7 @@
 #include "SimpleCPU.h"
 #include "SimplePCPU.h"
 #include "AdvancedGPU.cuh"
+#include "ComplexPCPU.h"
 
 cudaError_t addWithCuda(int* c, const int* a, const int* b, unsigned int size);
 
@@ -66,7 +67,10 @@ int main()
 
 
 	unsigned char* mapCharGPU = new unsigned char[size];
-	std::copy(mapChar, mapChar + advancedSize, mapCharGPU);
+	std::copy(mapChar, mapChar + advancedSize, mapCharGPU);	
+	
+	unsigned char* mapCharPCPU = new unsigned char[size];
+	std::copy(mapChar, mapCharPCPU + advancedSize, mapCharPCPU);
 
 	auto start = std::chrono::high_resolution_clock::now();
 	runEvaluateSimple(mapGPU, mapBuffer, width, height, iterations, threads);
@@ -79,6 +83,10 @@ int main()
 
 	auto startAdvancedGPU = std::chrono::high_resolution_clock::now();
 	runEvaluateAdvanced(mapCharGPU, mapCharBuffer, advancedWidth, advancedHeight, iterations, 1, threads);
+	auto stop = std::chrono::high_resolution_clock::now();	
+	
+	auto startComplexPCPU = std::chrono::high_resolution_clock::now();
+	iterationComplexParallel(mapCharPCPU, mapCharBuffer, advancedWidth, advancedHeight, iterations, threads);
 	auto stop = std::chrono::high_resolution_clock::now();
 
 	std::cout << std::endl;
@@ -87,11 +95,13 @@ int main()
 	auto durationGPU = std::chrono::duration_cast<std::chrono::milliseconds>(startCPU - start);
 	auto durationCPU = std::chrono::duration_cast<std::chrono::milliseconds>(startPCPU - startCPU);
 	auto durationPCPU = std::chrono::duration_cast<std::chrono::milliseconds>(startAdvancedGPU - startPCPU);
-	auto durationAdvancedGPU = std::chrono::duration_cast<std::chrono::milliseconds>(stop - startPCPU);
+	auto durationAdvancedGPU = std::chrono::duration_cast<std::chrono::milliseconds>(startComplexPCPU - startPCPU);
+	auto durationComplexPCPU = std::chrono::duration_cast<std::chrono::milliseconds>(stop - startComplexPCPU);
 	std::cout << "gpu: " << durationGPU.count() << std::endl;
 	//std::cout << "cpu: " << durationCPU.count() << std::endl;
 	//std::cout << "pcpu: " << durationPCPU.count() << std::endl;
 	std::cout << "advanced gpu: " << durationAdvancedGPU.count() << std::endl;
+	std::cout << "complex pcpu: " << durationComplexPCPU.count() << std::endl;
 
 
 	//if (!compareMap(mapCPU, mapGPU, width, height)) {
@@ -102,6 +112,10 @@ int main()
 	//}
 	if (!compareBoolToCharMap(mapGPU, mapCharGPU, advancedWidth, advancedHeight)) {
 		std::cout << "Advanced GPU incorrect result map" << std::endl;
+	}	
+	
+	if (!compareBoolToCharMap(mapGPU, mapCharPCPU, advancedWidth, advancedHeight)) {
+		std::cout << "Complex PCPU incorrect result map" << std::endl;
 	}
 
 	//std::cout << "Alive cells: " << aliveCells(mapGPU, width, height) << " " << aliveCells(mapCPU, width, height) << " " << aliveCells(mapPCPU, width, height) << std::endl;
