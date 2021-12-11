@@ -10,6 +10,7 @@
 #include "SimpleGPU.cuh"
 #include "SimpleCPU.h"
 #include "SimplePCPU.h"
+#include "AdvancedGPU.cuh"
 
 cudaError_t addWithCuda(int* c, const int* a, const int* b, unsigned int size);
 
@@ -21,11 +22,17 @@ __global__ void addKernel(int* c, const int* a, const int* b)
 
 int main()
 {
-	int iterations = 10000;
-	int threads = 256;
-	int width = 480;
-	int height = 480;
+	int iterations = 10;
+	int threads = 64;
+	int width = 4096;
+	int height = 4096;
 	int size = width * height;
+
+
+	int advancedWidth = width/8;
+	int advancedHeight = height;
+	int advancedSize = advancedWidth*advancedHeight;
+
 
 	bool* map = new bool[size];
 	bool* mapBuffer = new bool[size];
@@ -35,21 +42,37 @@ int main()
 	//prettyPrint(map, width, height);
 
 	bool* mapGPU = new bool[size];
-	std::copy(map, map+size, mapGPU);
+	std::copy(map, map + size, mapGPU);
 	bool* mapCPU = new bool[size];
 	std::copy(map, map + size, mapCPU);
 	bool* mapPCPU = new bool[size];
 	std::copy(map, map + size, mapPCPU);
 
+	unsigned char* mapChar = new unsigned char[advancedSize];
+	unsigned char* mapCharBuffer = new unsigned char[advancedSize];
+	//generateMap(mapChar, advancedWidth, advancedHeight);
+	copyBoolToCharMap(map, mapChar, advancedWidth, advancedHeight);
+
+
+	if (!compareBoolToCharMap(map, mapChar, advancedWidth, advancedHeight)) {
+		std::cout << "Copying map is incorrect" << std::endl;
+	}
+
+
+	unsigned char* mapCharGPU = new unsigned char[size];
+	std::copy(mapChar, mapChar + advancedSize, mapCharGPU);
+
 	auto start = std::chrono::high_resolution_clock::now();
 	runEvaluateSimple(mapGPU, mapBuffer, width, height, iterations, threads);
 
 	auto startCPU = std::chrono::high_resolution_clock::now();
-	//iterationSerial(mapCPU, mapBuffer, iterations, height, width);
+	// iterationSerial(mapCPU, mapBuffer, iterations, height, width);
 
 	auto startPCPU = std::chrono::high_resolution_clock::now();
-	//iterationSimpleParallel(mapPCPU, mapBuffer, size, iterations, height, width);
+	// iterationSimpleParallel(mapPCPU, mapBuffer, size, iterations, height, width);
 
+	auto startAdvancedGPU = std::chrono::high_resolution_clock::now();
+	runEvaluateAdvanced(mapCharGPU, mapCharBuffer, advancedWidth, advancedHeight, iterations, 1, threads);
 	auto stop = std::chrono::high_resolution_clock::now();
 
 	std::cout << std::endl;
@@ -57,24 +80,30 @@ int main()
 	std::cout << std::endl;
 	auto durationGPU = std::chrono::duration_cast<std::chrono::milliseconds>(startCPU - start);
 	auto durationCPU = std::chrono::duration_cast<std::chrono::milliseconds>(startPCPU - startCPU);
-	auto durationPCPU = std::chrono::duration_cast<std::chrono::milliseconds>(stop - startPCPU);
+	auto durationPCPU = std::chrono::duration_cast<std::chrono::milliseconds>(startAdvancedGPU - startPCPU);
+	auto durationAdvancedGPU = std::chrono::duration_cast<std::chrono::milliseconds>(stop - startPCPU);
 	std::cout << "gpu: " << durationGPU.count() << std::endl;
-	std::cout << "cpu: " << durationCPU.count() << std::endl;
-	std::cout << "pcpu: " << durationPCPU.count() << std::endl;
+	//std::cout << "cpu: " << durationCPU.count() << std::endl;
+	//std::cout << "pcpu: " << durationPCPU.count() << std::endl;
+	std::cout << "advanced gpu: " << durationAdvancedGPU.count() << std::endl;
 
-	if (!compareMap(mapCPU, mapGPU, width, height)) {
-		std::cout << "GPU incorrect result map" << std::endl;
-	}
-	if (!compareMap(mapCPU, mapPCPU, width, height)) {
-		std::cout << "PCPU incorrect result map" << std::endl;
+
+	//if (!compareMap(mapCPU, mapGPU, width, height)) {
+	//	std::cout << "GPU incorrect result map" << std::endl;
+	//}
+	//if (!compareMap(mapCPU, mapPCPU, width, height)) {
+	//	std::cout << "PCPU incorrect result map" << std::endl;
+	//}
+	if (!compareBoolToCharMap(mapGPU, mapCharGPU, advancedWidth, advancedHeight)) {
+		std::cout << "Advanced GPU incorrect result map" << std::endl;
 	}
 
-	std::cout << "Alive cells: " << aliveCells(mapGPU, width, height) << " " << aliveCells(mapCPU, width, height) << " " << aliveCells(mapPCPU, width, height) << std::endl;
+	//std::cout << "Alive cells: " << aliveCells(mapGPU, width, height) << " " << aliveCells(mapCPU, width, height) << " " << aliveCells(mapPCPU, width, height) << std::endl;
 
 	//prettyPrint(map, width, height);
 
 	std::cout << "press any key to exit";
-	getch();
+	//getch();
 
 	return 0;
 }

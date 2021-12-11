@@ -2,6 +2,7 @@
 
 unsigned char _generateRandomCellGroup();
 unsigned int _countSetBits(unsigned char x);
+unsigned char boolToChar(bool*);
 
 void generateMap(bool* map, size_t width, size_t height) {
 	srand(time(NULL));
@@ -24,7 +25,7 @@ void generateMap(unsigned char* map, size_t width, size_t height) {
 
 	unsigned int counter = 0;
 
-	for (size_t i = 0;i < width/8; i++) {
+	for (size_t i = 0;i < width; i++) {
 		for (size_t j = 0;j < height; j++) {
 			map[j * width + i] = _generateRandomCellGroup();
 			counter += _countSetBits(map[j * width + i]);
@@ -35,6 +36,20 @@ void generateMap(unsigned char* map, size_t width, size_t height) {
 	std::cout << "Percent: " << (float)counter / (float)(width * height) << std::endl;
 }
 
+void copyBoolToCharMap(bool* map1, unsigned char* map2, size_t width, size_t height) {
+	for (size_t i = 0;i < width; i++) {
+		for (size_t j = 0;j < height; j++) {
+			unsigned char val = 0;
+			for (size_t k = 0; k < 8;k++) {
+				val <<= 1;
+				if (map1[j*width+i*8+k]) val |= 1;
+			}
+			map2[j * width + i] = val;
+		}
+	}
+}
+
+
 bool compareMap(bool* map1, bool* map2, size_t width, size_t height) {
 	for (size_t i = 0; i < width; i++) {
 		for (size_t j = 0;j < height;j++) {
@@ -44,6 +59,29 @@ bool compareMap(bool* map1, bool* map2, size_t width, size_t height) {
 	}
 	return true;
 }
+
+bool compareBoolToCharMap(bool* map1, unsigned char* map2, size_t width, size_t height) {
+	for (size_t i= 0; i < width; i++) {
+		for (size_t j = 0;j < height;j++) {
+			unsigned char val = 0;
+			for (size_t k = 0; k < 8;k++) {
+				val <<= 1;
+				if (map1[j * width + i * 8 + k]) val |= 1;
+			}
+			if (map2[j * width + i] != val) { 
+				std::cout << "Difference found at " << j*width << " " << i << std::endl;
+				std::cout << (int)map2[j * width + i] << " ";
+				for (size_t k = 0; k < 8;k++) {
+					std::cout << (int)map1[j * width + i * 8 + k];
+				}
+				std::cout << std::endl;
+				return false; 
+			}
+		}
+	}
+	return true;
+}
+
 
 unsigned int aliveCells(bool* map, size_t width, size_t height) {
 	unsigned int counter = 0;
@@ -94,9 +132,18 @@ void prettyPrint(bool* map, int width, int height) {
 
 void prettyPrint(unsigned char* map, int width, int height) {
 	for (size_t i = 0; i < height; i++) {
-		for (size_t j = 0; j < width/8; j++) {
-			std::cout << map[i * width + j] * 1 << " ";
+		for (size_t j = 0; j < width; j++) {
+			std::cout << (int)map[i * width + j] << " ";
 		}
 		std::cout << std::endl;
 	}
+}
+
+unsigned char boolToChar(bool* b) {
+	unsigned char val = 0;
+	for (int i = 0; i < 8; i++) {
+		val <<= 1;
+		if (b[i]) val |= 1;
+	}
+	return val;
 }
